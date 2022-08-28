@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
 import 'package:kalendar2/homepage.dart';
 import 'package:kalendar2/more_page.dart';
+import 'package:kalendar2/navigation_drawer_widget.dart';
 import 'package:kalendar2/profile.dart';
 
 class DemoApp extends StatefulWidget {
@@ -77,6 +78,7 @@ class _DemoAppState extends State<DemoApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
           title: const Text('Training Log'),
           centerTitle: true,
@@ -84,12 +86,12 @@ class _DemoAppState extends State<DemoApp> {
               borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(9),
           )),
-          leading: IconButton(
-            onPressed: () {
-              // do something
-            },
-            icon: Icon(Icons.menu),
-          ),
+          // leading: IconButton(
+          //   onPressed: () {
+          //     // do something
+          //   },
+          //   icon: Icon(Icons.menu),
+          // ),
           actions: <Widget>[
             IconButton(
               icon: Icon(
