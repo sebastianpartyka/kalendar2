@@ -46,4 +46,7 @@
 // Additional info/commentary: notka do wpisania z klawiatury, albo Text To Speech
 // Samopoczucie: :> :) :| :( :<
 
+//AddNewEquipment to samo dla equipment
+//AddNewGoal dla celów
+//AddNewAchievement dla achievements
 

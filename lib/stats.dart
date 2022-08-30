@@ -11,7 +11,7 @@ class Stats extends StatelessWidget {
     //return Container(color: const Color(0xFF2DBD3A));
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Profile'),
+          title: const Text('Stats'),
           centerTitle: true,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
