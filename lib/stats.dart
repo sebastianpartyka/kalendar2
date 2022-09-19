@@ -14,7 +14,7 @@ class Stats extends StatelessWidget {
     //return Container(color: const Color(0xFF2DBD3A));
 
     Map<String, double> dataMap = {
-      "Siłownia": 5,
+      "Siłownia": 4,
       "Bieganie": 3,
       "Rower": 2,
       "Pływanie": 2,

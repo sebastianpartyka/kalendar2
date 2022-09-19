@@ -58,6 +58,16 @@ class _DemoAppState extends State<DemoApp> {
           description: '1000 m',
           color: Colors.lightBlue),
     ],
+    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1):
+        [
+      CleanCalendarEvent('Rozciąganie',
+          startTime: DateTime(DateTime.now().year, DateTime.now().month,
+              DateTime.now().day + 1, 12, 30),
+          endTime: DateTime(DateTime.now().year, DateTime.now().month,
+              DateTime.now().day + 1, 14, 0),
+          description: 'Szpagaty i mostek',
+          color: Colors.yellow),
+    ],
   };
 
   void _handleData(date) {

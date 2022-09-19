@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "493698261298",
+    "project_id": "calendar-753a9",
+    "storage_bucket": "calendar-753a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493698261298:android:6e76466669f990e26af72b",
+        "android_client_info": {
+          "package_name": "com.sebastianpartyka.kalendar2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493698261298-k73hg6j9ivg76nonbe06n8220734mrq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG4ompVc9kgIpUgDnNfJU9YXcfJWYWWk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493698261298-k73hg6j9ivg76nonbe06n8220734mrq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

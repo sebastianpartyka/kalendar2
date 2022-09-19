@@ -1,4 +1,4 @@
-package com.example.kalendar2
+package com.sebastianpartyka.kalendar2
 
 import io.flutter.embedding.android.FlutterActivity
 
