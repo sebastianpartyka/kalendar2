@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
+import 'package:kalendar2/event/event_page.dart';
 import 'package:kalendar2/homepage.dart';
 import 'package:kalendar2/more_page.dart';
 import 'package:kalendar2/navigation_drawer_widget.dart';
@@ -171,6 +172,11 @@ class _DemoAppState extends State<DemoApp> {
       floatingActionButton: FloatingActionButton(
         //Floating action button on Scaffold
         onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const EventPage(),
+            ),
+          );
           //code to execute on button press
         },
         child: Icon(Icons.add), //icon inside button
