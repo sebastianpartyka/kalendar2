@@ -1,213 +1,175 @@
 import 'package:flutter/material.dart';
 import 'package:kalendar2/DemoApp.dart';
-import 'package:kalendar2/event/event_provider.dart';
-import 'package:kalendar2/event/event_tools.dart';
+import 'package:kalendar2/more_page.dart';
+import 'package:kalendar2/profile.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class EventPage extends StatefulWidget {
-  final Event? event;
-
-  const EventPage({Key? key, this.event}) : super(key: key);
-
-  @override
-  State<EventPage> createState() => _EventPageState();
-}
-
-class _EventPageState extends State<EventPage> {
-  final titleController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  late DateTime fromDate;
-  late DateTime toDate;
-
-  @override
-  void dispose() {
-    titleController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.event == null) {
-      fromDate = DateTime.now();
-      toDate = DateTime.now().add(
-        const Duration(hours: 2),
-      );
-    }
-  }
+class EventPage extends StatelessWidget {
+  const EventPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    //return Container(color: const Color(0xFF2DBD3A));
     return Scaffold(
-      appBar: AppBar(
-        leading: const CloseButton(),
-        actions: [
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.check_box_rounded),
-            label: const Text('SAVE'),
+        appBar: AppBar(
+          title: const Text('Add Event'),
+          centerTitle: true,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(9),
+          )),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // do something
+            },
+            icon: Icon(Icons.close),
           ),
-        ],
-        // title: const Center(
-        //   child: Text(''),
-        // ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(23.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              title(),
-              const SizedBox(height: 15),
-              buildDateTimePickers(),
-            ],
-          ),
+          actions: <Widget>[
+            // ikona z napisem albo bez
+            // ElevatedButton.icon(
+            //     onPressed: () {},
+            //     icon: Icon(Icons.check_box),
+            //     label: const Text('SAVE')
+            IconButton(
+              icon: Icon(
+                Icons.check_box,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // do something
+              },
+            ),
+            // ), close elevated button
+          ],
         ),
-      ),
-    );
-  }
+        // body: floatingActionButton: FloatingActionButton(
+        //   //Floating action button on Scaffold
+        //   onPressed: () {
+        //     //code to execute on button press
+        //   },
+        //   child: Icon(Icons.add), //icon inside button
+        // )
 
-  title() => TextFormField(
-        style: const TextStyle(fontSize: 20),
-        decoration: const InputDecoration(
-          border: UnderlineInputBorder(),
-          hintText: "Event's name",
-        ),
-        onFieldSubmitted: (_) => saveForm(),
-        controller: titleController,
-        validator: (title) =>
-            title != null && title.isEmpty ? 'Name cannot be empty' : null,
-      );
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        //floating action button position to center
 
-  buildDateTimePickers() => Column(
-        children: [
-          buildFrom(),
-          buildTo(),
-        ],
-      );
-
-  buildFrom() => Column(
-        children: [
-          Row(
-            children: const [
-              Text('From:'),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: buildDropdownField(
-                  text: DateTools.toDate(fromDate),
-                  onClicked: () {},
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // SizedBox(height: 20),
+            // Text(
+            //   'Profil zawartość',
+            //   style: TextStyle(fontSize: 10),
+            // ),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FormBuilderDateTimePicker(
+                name: "date",
+                initialValue: DateTime.now(),
+                // widget.selectedDate ?? widget.event?.date ?? DateTime.now(),
+                initialDate: DateTime.now(),
+                fieldHintText: "Add Date",
+                initialDatePickerMode: DatePickerMode.day,
+                inputType: InputType.date,
+                format: DateFormat('EEEE, dd MMMM, yyyy'),
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  prefixIcon: Icon(Icons.calendar_today_rounded),
                 ),
               ),
-              Expanded(
-                child: buildDropdownField(
-                  text: DateTools.toTime(fromDate),
-                  onClicked: () {},
-                ),
-              )
-            ],
-          ),
-          //Row(),
-        ],
-      );
-
-  buildTo() => Column(
-        children: [
-          Row(
-            children: const [
-              Text('To:'),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: buildDropdownField(
-                  text: DateTools.toDate(toDate),
-                  onClicked: () {},
+            ),
+            //SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.all(7.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  hintText: 'Event name - Running etc.',
                 ),
               ),
-              Expanded(
-                child: buildDropdownField(
-                  text: DateTools.toTime(toDate),
-                  onClicked: () {},
+            ),
+
+            //SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.all(7.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  hintText: 'Description',
+                  prefixIcon: Icon(Icons.short_text_rounded),
                 ),
-              )
-            ],
-          ),
-          //Row(),
-        ],
-      );
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(7.0),
+              child: Column(
+                children: [
+                  TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      hintText: "Details - How was your workout?",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      // focusedBorder: OutlineInputBorder(
+                      //     borderSide:
+                      //         BorderSide(width: 1, color: Colors.redAccent))),
+                    ),
 
-  buildDropdownField({required String text, required VoidCallback onClicked}) =>
-      ListTile(
-        title: Text(text),
-        trailing: const Icon(Icons.arrow_drop_down),
-        onTap: onClicked,
-      );
+// dodać duration time z cupertino picker
+//set state stąd https://www.youtube.com/watch?v=LFQgZc4oKa4
+// reszta stąd: https://www.youtube.com/watch?v=Tnjex6C94qc&list=PL7-HzJSunhN5I2jgwkq5cQqmqsa1PMF6Z&index=61
 
-  Future pickFromDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(fromDate, pickDate: pickDate);
-    if (date == null) return;
-    if (date.isAfter(toDate)) {
-      toDate = DateTime(
-        date.year,
-        date.month,
-        date.day,
-      );
-    }
-    setState(() => fromDate = date);
-  }
-
-  Future pickToDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(toDate,
-        pickDate: pickDate, firstDate: pickDate ? fromDate : null);
-    if (date == null) return;
-
-    setState(() => toDate = date);
-  }
-
-  Future<DateTime?> pickDateTime(
-    DateTime initialDate, {
-    required bool pickDate,
-    DateTime? firstDate,
-  }) async {
-    if (pickDate) {
-      final date = await showDatePicker(
-          context: context,
-          initialDate: initialDate,
-          firstDate: firstDate ?? DateTime(2020, 1),
-          lastDate: DateTime(2050, 1));
-      if (date == null) return null;
-
-      final time =
-          Duration(hours: initialDate.hour, minutes: initialDate.minute);
-
-      return date.add(time);
-    }
-  }
-
-  Future saveForm() async {
-    final isValid = _formKey.currentState!.validate();
-
-    if (isValid) {
-      final event = Event(
-        title: titleController.text,
-        from: fromDate,
-        to: toDate,
-      );
-
-      final provider = Provider.of<EventProvider>(context, listen: false);
-      provider.addEvent(event);
-      Navigator.of(context).pop();
-    }
+                    // Padding(
+                    //   padding: const EdgeInsets.all(7.0),
+                    //   child: TextField(
+                    //     decoration: InputDecoration(
+                    //       border: OutlineInputBorder(
+                    //         borderRadius: BorderRadius.circular(20),
+                    //       ),
+                    //       hintText: 'Duration',
+                    //       prefixIcon: Icon(Icons.short_text_rounded),
+                    //     ),
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(7.0),
+                    //   child: TextField(
+                    //     decoration: InputDecoration(
+                    //       border: OutlineInputBorder(
+                    //         borderRadius: BorderRadius.circular(20),
+                    //       ),
+                    //       hintText: 'Equipment drop down to be done',
+                    //       prefixIcon: Icon(Icons.short_text_rounded),
+                    //     ),
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(7.0),
+                    //   child: TextField(
+                    //     decoration: InputDecoration(
+                    //       border: OutlineInputBorder(
+                    //         borderRadius: BorderRadius.circular(20),
+                    //       ),
+                    //       hintText: 'Route or preset workout if applicable to done',
+                    //       prefixIcon: Icon(Icons.short_text_rounded),
+                    //     ),
+                    //   ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }

@@ -7,6 +7,9 @@ import 'package:kalendar2/homepage.dart';
 import 'package:kalendar2/more_page.dart';
 import 'package:kalendar2/navigation_drawer_widget.dart';
 import 'package:kalendar2/profile.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+//import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
 
 class DemoApp extends StatefulWidget {
   @override
@@ -24,7 +27,7 @@ class _DemoAppState extends State<DemoApp> {
     // ProfilePage(),
     MorePage(),
   ];
-
+  
   final Map<DateTime, List<CleanCalendarEvent>> events = {
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day): [
       CleanCalendarEvent('Bieganie - interwały',

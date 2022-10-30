@@ -29,6 +29,13 @@
             {
               "client_id": "493698261298-k73hg6j9ivg76nonbe06n8220734mrq1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "493698261298-ng60j1pb717pbnbhs00he0gtplouomoe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sebastianpartyka.kalendar2"
+              }
             }
           ]
         }
