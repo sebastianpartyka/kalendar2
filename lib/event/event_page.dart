@@ -6,8 +6,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
-class EventPage extends StatelessWidget {
+class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
+
+  @override
+  State<EventPage> createState() => _EventPageState();
+}
+
+class _EventPageState extends State<EventPage> {
+  final _controller = TextEditingController();
+  final _controller1 = TextEditingController();
+  final _controller2 = TextEditingController();
+  String eventname = "";
+  String description = "";
+  String details = "";
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +50,11 @@ class EventPage extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                // do something
+                setState(() {
+                  eventname = _controller.text;
+                  description = _controller1.text;
+                  details = _controller2.text;
+                });
               },
             ),
             // ), close elevated button
@@ -93,6 +109,7 @@ class EventPage extends StatelessWidget {
                   ),
                   hintText: 'Event name - Running etc.',
                 ),
+                controller: _controller,
               ),
             ),
 
@@ -107,6 +124,7 @@ class EventPage extends StatelessWidget {
                   hintText: 'Description',
                   prefixIcon: Icon(Icons.short_text_rounded),
                 ),
+                controller: _controller1,
               ),
             ),
             Container(
@@ -125,7 +143,7 @@ class EventPage extends StatelessWidget {
                       //     borderSide:
                       //         BorderSide(width: 1, color: Colors.redAccent))),
                     ),
-
+                    controller: _controller2,
 // dodać duration time z cupertino picker
 //set state stąd https://www.youtube.com/watch?v=LFQgZc4oKa4
 // reszta stąd: https://www.youtube.com/watch?v=Tnjex6C94qc&list=PL7-HzJSunhN5I2jgwkq5cQqmqsa1PMF6Z&index=61
@@ -169,7 +187,13 @@ class EventPage extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 20),
+            Text(eventname),
+            Text(description),
+            Text(details),
           ],
         ));
   }
+
+  // void setState(Null Function() param0) {}
 }
